@@ -21,6 +21,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: test
-        run: |
-          Testing...
-          npm run test
+        run: npm run test
