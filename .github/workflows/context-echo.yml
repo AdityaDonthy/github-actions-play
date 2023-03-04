@@ -1,0 +1,11 @@
+name: echo issue context
+
+on: issues
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: echo context
+      run: echo ${{ toJSON(github.event) }}
