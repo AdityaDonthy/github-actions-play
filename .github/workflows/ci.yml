@@ -30,13 +30,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: test
+    outputs:
+      index-file: ${{ steps.publish.outputs.index-file }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install
         run: npm ci
       - name: Build
         run: npm run build
+      - name: publish file name
+        id: publish
+        run: find dist/assets/*.js -type f -execdir echo 'index-file={}' >> $GITHUB_OUTPUT  ';'
       - name: Upload build
         uses: actions/upload-artifact@v3
         with:
@@ -52,5 +57,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: distribution files
+      - name: output index file name
+        run: echo ${{ needs.build.outputs.index-file }}
       - name: output files
         run: ls -la
