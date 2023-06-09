@@ -85,3 +85,5 @@ What if I want to run a step only if the previous job failed? I want to upload t
           name: dist-files
           path: dist
 ```
+
+We could also run jobs conditionally.
